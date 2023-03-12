@@ -24,7 +24,7 @@ abstract class Message : MessageObject {
 }
 
 /**
- * Get sub [MessageObject]'s list of this class.
+ * Get sub [MessageObject] list of this class.
  */
 val MessageGroup.subObjects: List<MessageObject>
     get() = this::class
