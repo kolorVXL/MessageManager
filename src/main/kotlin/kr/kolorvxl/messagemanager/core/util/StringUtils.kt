@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.core.message
+package kr.kolorvxl.messagemanager.core.util
 
 private const val OUT = 0
 private const val UPPERCASE = 1
