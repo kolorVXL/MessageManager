@@ -30,4 +30,4 @@ val MessageGroup.subObjects: List<MessageObject>
     get() = this::class
         .nestedClasses
         .mapNotNull { it.objectInstance }
-        .filterIsInstance<MessageObject>( )
+        .filterIsInstance<MessageObject>()
