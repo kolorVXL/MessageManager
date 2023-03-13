@@ -10,13 +10,4 @@ interface MessageSet
  */
 abstract class Message {
     var identifier: Int? = null
-        private set
 }
-
-/**
- * Get sub [MessageObject] list of this class.
- */
-val Any.subObjects: List<Any>
-    get() = this::class
-        .nestedClasses
-        .mapNotNull { it.objectInstance }
