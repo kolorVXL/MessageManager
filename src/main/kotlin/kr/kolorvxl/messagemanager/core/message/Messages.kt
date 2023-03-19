@@ -1,5 +1,6 @@
 package kr.kolorvxl.messagemanager.core.message
 
+
 data class MessageType(val name: List<String>, var identifier: Int? = null)
 
 
