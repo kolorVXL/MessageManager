@@ -1,8 +1,23 @@
 package kr.kolorvxl.messagemanager.core.message
 
-sealed class Messages(open val name: String)
+
+data class Message(val value: String)
+
+data class MessageType(val name: List<String>, var identifier: Int? = null)
 
 
-data class MessageGroup(override val name: String, val subMessages: List<Messages>) : Messages(name)
+abstract class MessageStorage<E : Enum<E>>(
+    languages: List<Enum<E>>, messageTypes: List<MessageType>
+) {
 
-data class Message(override val name: String) : Messages(name)
+    abstract val values: List<List<Message>>
+
+    init {
+        messageTypes.forEachIndexed { index, message ->
+            message.identifier = index
+        }
+    }
+
+    operator fun get(languageType: Enum<E>) = values[languageType.ordinal]
+
+}
