@@ -8,4 +8,4 @@ interface StaticMessageSet
 /**
  * The single message class.
  */
-abstract class StaticMessage(var message: Message? = null)
+abstract class StaticMessage(var messageType: MessageType? = null)
