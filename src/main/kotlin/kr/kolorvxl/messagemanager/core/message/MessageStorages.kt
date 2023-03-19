@@ -1,8 +1,5 @@
 package kr.kolorvxl.messagemanager.core.message
 
-/*
- * MessageStorages
- */
 
 abstract class MessageStorage<E : Enum<E>, M>(
     languages: List<Enum<E>>, messageTypes: List<MessageType>
@@ -19,6 +16,7 @@ abstract class MessageStorage<E : Enum<E>, M>(
     open operator fun get(languageType: Enum<E>) = values[languageType.ordinal]
 
 }
+
 
 data class SingleMessageStorage<M>(val values: List<Message<M>>) {
 
