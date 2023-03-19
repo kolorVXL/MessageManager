@@ -10,3 +10,8 @@ object NotInitializedMessage : Message
 object NullMessage : Message
 
 data class NotNullMessage(val value: String) : Message
+
+
+interface MessageTypesWrapper {
+    fun toMessageTypes(): List<MessageType>
+}
