@@ -2,16 +2,20 @@ package kr.kolorvxl.messagemanager.core.message
 
 
 abstract class MessageStorage<E : Enum<E>>(
-    languages: List<Enum<E>>, messageTypes: List<MessageType>
+    languages: Class<Enum<E>>, messageTypes: List<MessageType>
 ) {
 
     abstract val values: List<SingleMessageStorage>
 
     init {
-        messageTypes.forEachIndexed { index, message ->
-            message.identifier = index
-        }
+        messageTypes
+            .forEachIndexed { index, message ->
+                message.identifier = index
+            }
     }
+
+    constructor(languages: Class<Enum<E>>, messageTypesWrapper: MessageTypesWrapper) :
+            this(languages, messageTypesWrapper.toMessageTypes())
 
     open operator fun get(languageType: Enum<E>) = values[languageType.ordinal]
 
