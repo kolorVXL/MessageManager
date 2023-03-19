@@ -1,23 +1,12 @@
 package kr.kolorvxl.messagemanager.core.message
 
-
-data class Message<M>(val value: M)
-
 data class MessageType(val name: List<String>, var identifier: Int? = null)
 
 
-abstract class MessageStorage<E : Enum<E>, M>(
-    languages: List<Enum<E>>, messageTypes: List<MessageType>
-) {
+sealed interface Message<M>
 
-    abstract val values: List<List<Message<M>>>
+class NotInitializedMessage<M> : Message<M>
 
-    init {
-        messageTypes.forEachIndexed { index, message ->
-            message.identifier = index
-        }
-    }
+class NullMessage<M> : Message<M>
 
-    operator fun get(languageType: Enum<E>) = values[languageType.ordinal]
-
-}
+data class NotNullMessage<M>(val value: M) : Message<M>
