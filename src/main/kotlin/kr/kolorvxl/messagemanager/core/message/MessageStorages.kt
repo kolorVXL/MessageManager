@@ -1,11 +1,11 @@
 package kr.kolorvxl.messagemanager.core.message
 
 
-abstract class MessageStorage<E : Enum<E>, M>(
+abstract class MessageStorage<E : Enum<E>>(
     languages: List<Enum<E>>, messageTypes: List<MessageType>
 ) {
 
-    abstract val values: List<SingleMessageStorage<M>>
+    abstract val values: List<SingleMessageStorage>
 
     init {
         messageTypes.forEachIndexed { index, message ->
@@ -18,7 +18,7 @@ abstract class MessageStorage<E : Enum<E>, M>(
 }
 
 
-data class SingleMessageStorage<M>(val values: List<Message<M>>) {
+data class SingleMessageStorage(val values: List<Message>) {
 
     operator fun get(messageType: MessageType) =
         messageType.identifier?.let { values[it] }

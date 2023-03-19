@@ -1,19 +1,34 @@
 package kr.kolorvxl.messagemanager.core.message
 
-data class FormatInformation<E : Enum<E>, M>(
-    val storage: MessageStorage<E, M>,
-    val language: Enum<E>
+
+data class FormatInformation<E : Enum<E>>(
+    val storage: MessageStorage<E>, val language: Enum<E>
 )
 
-abstract class MessageFormatter<E : Enum<E>, M, I, O, R> {
+
+abstract class MessageFormatter<R> : Cloneable {
 
     abstract fun format(
-        messageStorage: MessageStorage<E, M>,
-        language: Enum<E>,
-        messageType: MessageType,
-        function: MessageFormatter<E, M, I, O, R>.() -> Unit
+        string: String, function: MessageFormatter<R>.() -> Unit
     ): R
 
-    abstract fun replace(from: I, to: O)
+    abstract infix fun String.to(r: R)
+
+    abstract fun List<R>.concat(): R
+
+
+    @Suppress("UNCHECKED_CAST")
+    fun message(
+        string: String, function: MessageFormatter<R>.() -> Unit
+    ): R = ((clone() as MessageFormatter<R>).format(string, function))
+
+    fun List<R>.concat(between: R): R =
+        this
+            .fold(emptyList<R>()) { list, r ->
+                list
+                    .plus(between)
+                    .plus(r)
+            }
+            .concat()
 
 }
