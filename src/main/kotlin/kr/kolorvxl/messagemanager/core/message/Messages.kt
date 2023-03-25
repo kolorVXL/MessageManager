@@ -12,6 +12,11 @@ object NullMessage : Message
 data class NotNullMessage(val value: String) : Message
 
 
-interface MessageTypesWrapper {
-    fun toMessageTypes(): List<MessageType>
+abstract class MessageTypesWrapper {
+
+    protected abstract fun createMessageTypes(): List<MessageType>
+
+    val messageTypes
+        get() = createMessageTypes().mapIndexed { i, m -> m.copy(identifier = i) }
+
 }
