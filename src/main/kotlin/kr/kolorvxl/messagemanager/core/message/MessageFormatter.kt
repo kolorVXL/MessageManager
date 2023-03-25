@@ -6,10 +6,10 @@ data class FormatInformation<E : Enum<E>>(
 )
 
 
-abstract class MessageFormatter<R> : Cloneable {
+abstract class MessageFormatter<R, M : MessageFormatter<R, M>> : Cloneable {
 
     abstract fun format(
-        string: String, function: MessageFormatter<R>.() -> Unit
+        string: String, function: M.() -> Unit
     ): R
 
     abstract infix fun String.to(r: R)
@@ -19,8 +19,8 @@ abstract class MessageFormatter<R> : Cloneable {
 
     @Suppress("UNCHECKED_CAST")
     fun message(
-        string: String, function: MessageFormatter<R>.() -> Unit
-    ): R = ((clone() as MessageFormatter<R>).format(string, function))
+        string: String, function: M.() -> Unit
+    ): R = ((clone() as M).format(string, function))
 
     fun List<R>.concat(between: R): R =
         this
