@@ -8,10 +8,8 @@ import kr.kolorvxl.messagemanager.core.message.MessageTypesWrapper
  */
 open class StaticMessageSet : MessageTypesWrapper {
 
-    override fun toMessageTypes(): List<MessageType> =
-        this::class
-            .nestedClasses
-            .staticMessages
+    override fun createMessageTypes(): List<MessageType> =
+        this.staticMessages
             .map {
                 val messageType = MessageType(it.first)
                 it.second.messageType = messageType

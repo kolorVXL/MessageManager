@@ -1,6 +1,7 @@
 package kr.kolorvxl.messagemanager.api.message
 
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 
 object TestingSet : StaticMessageSet() {
@@ -33,12 +34,12 @@ class StaticMessageTest {
     @Test
     fun `static message test`() {
             TestingSet
-                .staticMessages
+                .messageTypes
                 .map {
-                    it.first.reduce { a, b ->
-                        "$a.$b"
-                    }
+                    it.name.reduce { acc, s -> "$acc.$s" }
                 }.forEach(::println)
+
+        assertEquals(4, TestingSet.messageTypes.size)
     }
 
 }
