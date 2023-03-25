@@ -7,6 +7,5 @@ abstract class MessageStorage<E : Enum<E>>(
 }
 
 data class SingleMessageStorage(val values: List<Message>) {
-    operator fun get(messageType: MessageType) =
-        messageType.identifier?.let { values[it] }
+    operator fun get(messageType: MessageType) = messageType.identifier?.let { values[it] }
 }
