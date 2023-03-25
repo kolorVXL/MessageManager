@@ -1,5 +1,6 @@
 package kr.kolorvxl.messagemanager.core.util
 
+import kr.kolorvxl.messagemanager.bukkit.util.splitCamel
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
