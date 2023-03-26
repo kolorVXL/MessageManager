@@ -46,3 +46,19 @@ fun String.splitCamel(): List<String> {
     return words.drop(1)
 
 }
+
+fun List<String>.simpleReduce(between: String) =
+    this
+        .reduce { acc, s -> "$acc$between$s" }
+
+fun String.snakeCase() =
+    this
+        .splitCamel()
+        .map(String::lowercase)
+        .simpleReduce("_")
+
+fun String.kebabCase() =
+    this
+        .splitCamel()
+        .map(String::lowercase)
+        .simpleReduce("-")

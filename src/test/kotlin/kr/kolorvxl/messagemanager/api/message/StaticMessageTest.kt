@@ -1,10 +1,11 @@
 package kr.kolorvxl.messagemanager.api.message
 
+import kr.kolorvxl.messagemanager.bukkit.util.kebabCase
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 
-object TestingSet : StaticMessageSet() {
+object TestingSet : StaticMessageSet(String::kebabCase) {
 
     object Test1 {
 
