@@ -1,12 +1,11 @@
 package kr.kolorvxl.messagemanager.bukkit
 
-import kr.kolorvxl.messagemanager.core.MessageFormatter
-import kr.kolorvxl.messagemanager.util.intersperse
+import kr.kolorvxl.messagemanager.core.FormalMessageFormatter
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
 
-class BukkitMessageFormatter : MessageFormatter<Array<BaseComponent>, BukkitMessageFormatter>() {
+class BukkitMessageFormatter : FormalMessageFormatter<Array<BaseComponent>, BukkitMessageFormatter>() {
 
     var color: ChatColor? = null
     var bold: Boolean? = null
@@ -16,41 +15,7 @@ class BukkitMessageFormatter : MessageFormatter<Array<BaseComponent>, BukkitMess
     var obfuscate: Boolean? = null
     var font: String? = null
 
-    private var innerValue: List<InnerMessage> = emptyList()
-
-    override fun format(string: String, function: BukkitMessageFormatter.() -> Unit): Array<BaseComponent> {
-        innerValue = listOf(InnerPlainMessage(string))
-        function()
-
-        val builder = ComponentBuilder()
-        innerValue.map {
-            when (it) {
-                is InnerPlainMessage -> it.value.toComponents()
-                is InnerComponentsMessage -> it.components
-            }
-        }.forEach(builder::append)
-        return builder.create()
-    }
-
-    override fun String.to(r: Array<BaseComponent>) {
-        innerValue = innerValue.map { message ->
-            when (message) {
-                is InnerPlainMessage -> message.value
-                    .split(this)
-                    .map { InnerPlainMessage(it) }
-                    .intersperse(InnerComponentsMessage(r))
-                is InnerComponentsMessage -> listOf(message)
-            }
-        }.flatten()
-    }
-
-    override fun List<Array<BaseComponent>>.concat(): Array<BaseComponent> {
-        val builder = ComponentBuilder()
-        this.forEach(builder::append)
-        return builder.create()
-    }
-
-    private fun String.toComponents(): Array<BaseComponent> {
+    override fun String.toResultType(): Array<BaseComponent> {
         val builder = ComponentBuilder(this)
 
         color?.let(builder::color)
@@ -64,8 +29,10 @@ class BukkitMessageFormatter : MessageFormatter<Array<BaseComponent>, BukkitMess
         return builder.create()
     }
 
-    sealed interface InnerMessage
-    class InnerPlainMessage(val value: String) : InnerMessage
-    class InnerComponentsMessage(val components: Array<BaseComponent>) : InnerMessage
+    override fun List<Array<BaseComponent>>.concat(): Array<BaseComponent> {
+        val builder = ComponentBuilder()
+        this.forEach(builder::append)
+        return builder.create()
+    }
 
 }
