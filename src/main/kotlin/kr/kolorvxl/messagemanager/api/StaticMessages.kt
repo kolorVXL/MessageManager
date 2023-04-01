@@ -49,11 +49,13 @@ val Any.staticMessages: List<NamedStaticMessage>
             .filterIsInstance<StaticMessage>()
             .map { NamedStaticMessage(it.className, it) }
 
-        val indirectSubs = classes.flatMap {
-            it.staticMessages.map { nsm ->
-                NamedStaticMessage(it.className + nsm.name, nsm.message)
+        val indirectSubs = classes
+            .map {
+                it.staticMessages.map { nsm ->
+                    NamedStaticMessage(it.className + nsm.name, nsm.message)
+                }
             }
-        }
+            .flatten()
 
         return directSubs + indirectSubs
     }
