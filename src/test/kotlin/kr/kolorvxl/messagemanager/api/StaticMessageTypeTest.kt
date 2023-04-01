@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 
-object TestingSet : StaticMessageSet(String::kebabCase) {
+object TestingTypeSet : StaticMessageTypeSet(String::kebabCase) {
 
     object Test1 {
 
@@ -31,16 +31,16 @@ object TestingSet : StaticMessageSet(String::kebabCase) {
 }
 
 
-class StaticMessageTest {
+class StaticMessageTypeTest {
 
     @Test
     fun `static message test`() {
-            TestingSet
+            TestingTypeSet
                 .messageTypes
                 .map { it.name.simpleReduce(".") }
                 .forEach(::println)
 
-        assertEquals(4, TestingSet.messageTypes.size)
+        assertEquals(4, TestingTypeSet.messageTypes.size)
     }
 
 }

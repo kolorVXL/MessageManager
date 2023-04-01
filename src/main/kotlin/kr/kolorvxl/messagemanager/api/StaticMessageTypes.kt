@@ -4,12 +4,12 @@ import kr.kolorvxl.messagemanager.core.MessageType
 import kr.kolorvxl.messagemanager.core.MessageTypesWrapper
 
 /**
- * The class of [StaticMessage] set. You can include [StaticMessage] in this.
+ * The class of [StaticMessageType] set. You can include [StaticMessageType] in this.
  */
-abstract class StaticMessageSet(private val transform: String.() -> String = { this }) : MessageTypesWrapper {
+abstract class StaticMessageTypeSet(private val transform: String.() -> String = { this }) : MessageTypesWrapper {
 
     /**
-     * The function to convert internal [List]<[StaticMessage]>s to [List]<[MessageType]>.
+     * The function to convert internal [List]<[StaticMessageType]>s to [List]<[MessageType]>.
      * @return Converted [List]<[MessageType]>.
      */
     override val messageTypes: List<MessageType> = this.staticMessages.mapIndexed { index, value ->
@@ -23,20 +23,20 @@ abstract class StaticMessageSet(private val transform: String.() -> String = { t
 }
 
 /**
- * The class of single static message. This exists to be used as elements of [StaticMessageSet].
+ * The class of single static message. This exists to be used as elements of [StaticMessageTypeSet].
  */
-abstract class StaticMessage(var messageType: MessageType? = null)
+abstract class StaticMessageType(var messageType: MessageType? = null)
 
 /**
- * The class to use [StaticMessage] simply.
+ * The class to use [StaticMessageType] simply.
  */
-abstract class End : StaticMessage()
+abstract class End : StaticMessageType()
 
 
 /**
- * The class that contains name and [StaticMessage]. This exists to be used as the return type of [Any.staticMessages].
+ * The class that contains name and [StaticMessageType]. This exists to be used as the return type of [Any.staticMessages].
  */
-data class NamedStaticMessage(val name: List<String>, val message: StaticMessage)
+data class NamedStaticMessage(val name: List<String>, val message: StaticMessageType)
 
 val Any.staticMessages: List<NamedStaticMessage>
     get() {
@@ -46,7 +46,7 @@ val Any.staticMessages: List<NamedStaticMessage>
             .mapNotNull { it.objectInstance }
 
         val directSubs = classes
-            .filterIsInstance<StaticMessage>()
+            .filterIsInstance<StaticMessageType>()
             .map { NamedStaticMessage(it.className, it) }
 
         val indirectSubs = classes
