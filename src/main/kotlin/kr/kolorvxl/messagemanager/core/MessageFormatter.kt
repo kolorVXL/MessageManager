@@ -1,8 +1,6 @@
 package kr.kolorvxl.messagemanager.core
 
-import kr.kolorvxl.messagemanager.bukkit.BukkitMessageFormatter
 import kr.kolorvxl.messagemanager.util.intersperse
-import net.md_5.bungee.api.chat.BaseComponent
 
 
 abstract class MessageFormatter<R, M : MessageFormatter<R, M>> : Cloneable {
