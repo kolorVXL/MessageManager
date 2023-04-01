@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.core.util
+package kr.kolorvxl.messagemanager.util
 
 import kr.kolorvxl.messagemanager.util.splitCamel
 import org.junit.jupiter.api.Test
