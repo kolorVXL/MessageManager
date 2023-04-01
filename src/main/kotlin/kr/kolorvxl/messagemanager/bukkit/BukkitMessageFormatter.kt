@@ -1,6 +1,7 @@
 package kr.kolorvxl.messagemanager.bukkit
 
 import kr.kolorvxl.messagemanager.core.MessageFormatter
+import kr.kolorvxl.messagemanager.util.intersperse
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
@@ -22,19 +23,25 @@ class BukkitMessageFormatter : MessageFormatter<Array<BaseComponent>, BukkitMess
         function()
 
         val builder = ComponentBuilder()
-        innerValue
-            .map {
-                when (it) {
-                    is InnerPlainMessage -> it.value.toComponents()
-                    is InnerComponentsMessage -> it.components
-                }
+        innerValue.map {
+            when (it) {
+                is InnerPlainMessage -> it.value.toComponents()
+                is InnerComponentsMessage -> it.components
             }
-            .forEach(builder::append)
+        }.forEach(builder::append)
         return builder.create()
     }
 
     override fun String.to(r: Array<BaseComponent>) {
-        TODO("Not yet implemented")
+        innerValue = innerValue.map { message ->
+            when (message) {
+                is InnerPlainMessage -> message.value
+                    .split(this)
+                    .map { InnerPlainMessage(it) }
+                    .intersperse(InnerComponentsMessage(r))
+                is InnerComponentsMessage -> listOf(message)
+            }
+        }.flatten()
     }
 
     override fun List<Array<BaseComponent>>.concat(): Array<BaseComponent> {
