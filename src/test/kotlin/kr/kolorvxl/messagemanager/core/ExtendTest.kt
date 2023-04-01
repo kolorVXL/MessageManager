@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.core.message
+package kr.kolorvxl.messagemanager.core
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertTrue

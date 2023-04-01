@@ -1,6 +1,6 @@
-package kr.kolorvxl.messagemanager.api.message
+package kr.kolorvxl.messagemanager.api
 
-import kr.kolorvxl.messagemanager.bukkit.util.kebabCase
+import kr.kolorvxl.messagemanager.util.kebabCase
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 

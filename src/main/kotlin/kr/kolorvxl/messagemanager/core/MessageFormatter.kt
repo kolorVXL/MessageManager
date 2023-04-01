@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.core.message
+package kr.kolorvxl.messagemanager.core
 
 
 data class FormatInformation<E : Enum<E>>(

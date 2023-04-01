@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.core.message
+package kr.kolorvxl.messagemanager.core
 
 abstract class MessageStorage<E : Enum<E>>(
     languages: Class<Enum<E>>, messageTypesWrapper: MessageTypesWrapper
