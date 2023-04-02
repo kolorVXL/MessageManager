@@ -47,6 +47,8 @@ fun String.splitCamel(): List<String> {
 
 }
 
+fun List<String>.simpleReduce() = simpleReduce("")
+
 fun List<String>.simpleReduce(between: String) =
     this.reduce { acc, s -> "$acc$between$s" }
 
