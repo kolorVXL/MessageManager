@@ -2,15 +2,15 @@ package kr.kolorvxl.messagemanager.core
 
 
 abstract class MessageStorage<E : Enum<E>>(
-    languages: Class<Enum<E>>, messageTypesWrapper: MessageTypesWrapper
+    languages: Class<Enum<E>>, messageTypeSet: MessageTypeSet
 ) {
     abstract fun get(languageType: Enum<E>): SingleMessageStorage
 }
 
 
 abstract class FormalMessageStorage<E : Enum<E>>(
-    languages: Class<Enum<E>>, messageTypesWrapper: MessageTypesWrapper
-) : MessageStorage<E>(languages, messageTypesWrapper) {
+    languages: Class<Enum<E>>, messageTypeSet: MessageTypeSet
+) : MessageStorage<E>(languages, messageTypeSet) {
 
     abstract val values: List<SingleMessageStorage>
 

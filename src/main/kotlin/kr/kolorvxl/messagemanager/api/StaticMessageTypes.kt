@@ -1,12 +1,12 @@
 package kr.kolorvxl.messagemanager.api
 
 import kr.kolorvxl.messagemanager.core.MessageType
-import kr.kolorvxl.messagemanager.core.MessageTypesWrapper
+import kr.kolorvxl.messagemanager.core.MessageTypeSet
 
 /**
  * The class of [StaticMessageType] set. You can include [StaticMessageType] in this.
  */
-abstract class StaticMessageTypeSet(private val transform: String.() -> String = { this }) : MessageTypesWrapper {
+abstract class StaticMessageTypeSet(private val transform: String.() -> String = { this }) : MessageTypeSet {
 
     /**
      * The function to convert internal [List]<[StaticMessageType]>s to [List]<[MessageType]>.

@@ -3,7 +3,7 @@ package kr.kolorvxl.messagemanager.core
 
 data class MessageType(val name: List<String>, var identifier: Int)
 
-interface MessageTypesWrapper {
+interface MessageTypeSet {
     val messageTypes: List<MessageType>
 }
 
