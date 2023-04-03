@@ -12,12 +12,13 @@ abstract class StaticMessageTypeSet(private val transform: String.() -> String =
      * The function to convert internal [List]<[StaticMessageType]>s to [List]<[MessageType]>.
      * @return Converted [List]<[MessageType]>.
      */
-    final override val messageTypes: List<MessageType> =
+    final override val messageTypes: List<MessageType> by lazy {
         this.staticMessages.mapIndexed { index, value ->
             val messageType = MessageType(value.name.map(transform), index)
             value.message.messageType = messageType
             messageType
         }
+    }
 
 }
 
