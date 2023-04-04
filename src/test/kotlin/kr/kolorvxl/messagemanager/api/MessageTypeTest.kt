@@ -31,16 +31,16 @@ object StaticTestTypeSet : StaticMessageTypeSet(String::kebabCase) {
 }
 
 object DynamicTestTypeSet : DynamicMessageTypeSet({
-    dir("test-1") {
-        type("test-3")
-        dir("sub-test-1") {
-            type("sub-test-2")
+    undef("test-1") {
+        def("test-3")
+        undef("sub-test-1") {
+            def("sub-test-2")
         }
-        dir("test-2") {
-            type("sub-test-3")
+        undef("test-2") {
+            def("sub-test-3")
         }
     }
-    type("test-3")
+    def("test-3")
 })
 
 

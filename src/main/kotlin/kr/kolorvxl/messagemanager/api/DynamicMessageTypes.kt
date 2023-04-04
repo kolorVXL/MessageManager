@@ -9,16 +9,20 @@ open class DynamicMessageTypeSet(function: DynamicMessageTypeSet.() -> Unit) : M
         TODO()
     }
 
-    fun dir(name: String, function: DynamicMessageTypeSet.() -> Unit) {
+    fun undef(name: String) {
+        TODO()
+    }
+
+    fun undef(name: String, function: DynamicMessageTypeSet.() -> Unit) {
         DynamicMessageTypeSet(function).messageTypes
         TODO()
     }
 
-    fun type(name: String) {
+    fun def(name: String) {
         TODO()
     }
 
-    fun hybrid(name: String, function: DynamicMessageTypeSet.() -> Unit) {
+    fun def(name: String, function: DynamicMessageTypeSet.() -> Unit) {
         DynamicMessageTypeSet(function).messageTypes
         TODO()
     }
