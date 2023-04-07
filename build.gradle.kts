@@ -17,6 +17,9 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation(kotlin("reflect"))
     compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-params:5.9.2")
 }
 
 tasks.test {
