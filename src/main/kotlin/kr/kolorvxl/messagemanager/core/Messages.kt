@@ -14,4 +14,4 @@ object NotInitializedMessage : Message
 
 object NullMessage : Message
 
-data class NotNullMessage(val value: String) : Message
+data class ValuableMessage(val value: String) : Message
