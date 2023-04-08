@@ -9,4 +9,6 @@ class StringMessageFormatter : FormalMessageFormatter<String, StringMessageForma
 
     override fun String.toResultType() = this
 
+    override fun selfConstruct() = StringMessageFormatter()
+
 }

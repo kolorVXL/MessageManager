@@ -35,4 +35,6 @@ class BukkitMessageFormatter : FormalMessageFormatter<Array<BaseComponent>, Bukk
         return builder.create()
     }
 
+    override fun selfConstruct() = BukkitMessageFormatter()
+
 }

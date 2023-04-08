@@ -13,11 +13,10 @@ abstract class MessageFormatter<R, M : MessageFormatter<R, M>> : Cloneable {
 
     abstract fun List<R>.concat(): R
 
+    abstract fun selfConstruct(): M
 
-    @Suppress("UNCHECKED_CAST")
-    fun message(
-        string: String, function: M.() -> Unit
-    ): R = ((clone() as M).format(string, function))
+
+    fun message(string: String, function: M.() -> Unit): R = selfConstruct().format(string, function)
 
 }
 
