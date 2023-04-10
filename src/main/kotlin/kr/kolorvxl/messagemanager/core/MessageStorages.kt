@@ -14,13 +14,55 @@ abstract class FormalMessageStorage<E : Enum<E>> : MessageStorage<E>() {
 
 }
 
+abstract class LazyInitMessageStorage<E : Enum<E>>(
+    languageTypeEnum: Class<E>,
+    messageTypeSet: MessageTypeSet,
+    maxLoad: Int
+) : FormalMessageStorage<E>() {
 
-data class SingleMessageStorage(val values: Array<Message>) {
+    override val values =
+        List(languageTypeEnum.enumConstants.size) { languageIndex ->
+            LazyInitSingleMessageStorage(
+                messageTypeSet.messageTypes.size,
+                { load(languageTypeEnum.enumConstants[languageIndex], it) },
+                maxLoad
+            )
+        }
 
-    operator fun get(messageType: MessageType) = messageType.identifier?.let { values[it] }
+    abstract fun load(languageType: Enum<E>, messageType: MessageType): Message
 
-    override fun equals(other: Any?) = values.contentEquals((other as? SingleMessageStorage)?.values)
+}
 
-    override fun hashCode() = values.contentHashCode()
+
+open class SingleMessageStorage(val values: Array<Message>) {
+
+    open operator fun get(messageType: MessageType): Message = values[messageType.identifier]
+
+}
+
+class LazyInitSingleMessageStorage(
+    size: Int, val function: (MessageType) -> Message, private val maxLoad: Int = 3
+) : SingleMessageStorage(Array(size) { NotInitializedMessage }) {
+
+    override operator fun get(messageType: MessageType): Message {
+        val index = messageType.identifier
+
+        if (values[index] !is NotInitializedMessage) {
+            return values[index]
+        }
+
+        for (i in 0 until maxLoad) {
+            values[index] = function(messageType)
+            if (!(values[index] is NotInitializedMessage || values[index] is NullMessage)) {
+                break
+            }
+        }
+
+        if (values[index] is NotInitializedMessage) {
+            values[index] = NullMessage
+        }
+
+        return values[index]
+    }
 
 }
