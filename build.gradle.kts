@@ -5,15 +5,21 @@ plugins {
     application
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "kr.kolorvxl"
+version = "1.0"
 
 repositories {
     mavenCentral()
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation(kotlin("reflect"))
+    compileOnly("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-params:5.9.2")
 }
 
 tasks.test {
