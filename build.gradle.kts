@@ -6,11 +6,16 @@ plugins {
 }
 
 group = "kr.kolorvxl"
-version = "1.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+}
+
+tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) })
 }
 
 dependencies {
