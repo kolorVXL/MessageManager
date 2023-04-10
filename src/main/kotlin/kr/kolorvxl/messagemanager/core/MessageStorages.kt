@@ -42,23 +42,23 @@ open class SingleMessageStorage(val values: Array<Message>) {
 
 class LazyInitSingleMessageStorage(
     size: Int, val function: (MessageType) -> Message, private val maxLoad: Int = 3
-) : SingleMessageStorage(Array(size) { NotInitializedMessage }) {
+) : SingleMessageStorage(Array(size) { NotInitMessage }) {
 
     override operator fun get(messageType: MessageType): Message {
         val index = messageType.identifier
 
-        if (values[index] !is NotInitializedMessage) {
+        if (values[index] !is NotInitMessage) {
             return values[index]
         }
 
         for (i in 0 until maxLoad) {
             values[index] = function(messageType)
-            if (!(values[index] is NotInitializedMessage || values[index] is NullMessage)) {
+            if (!(values[index] is NotInitMessage || values[index] is NullMessage)) {
                 break
             }
         }
 
-        if (values[index] is NotInitializedMessage) {
+        if (values[index] is NotInitMessage) {
             values[index] = NullMessage
         }
 

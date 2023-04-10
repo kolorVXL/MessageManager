@@ -10,7 +10,7 @@ interface MessageTypeSet {
 
 sealed interface Message
 
-object NotInitializedMessage : Message
+object NotInitMessage : Message
 
 object NullMessage : Message
 
