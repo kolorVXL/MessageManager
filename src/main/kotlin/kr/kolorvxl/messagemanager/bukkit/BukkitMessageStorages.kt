@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
-class BukkitLanguageStorage<E : Enum<E>>(
+class BukkitMessageStorage<E : Enum<E>>(
     languageTypeEnum: Class<E>,
     messageTypeSet: MessageTypeSet,
     javaPlugin: JavaPlugin,
