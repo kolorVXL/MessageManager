@@ -2,7 +2,7 @@ package kr.kolorvxl.messagemanager.core
 
 
 abstract class MessageStorage<E : Enum<E>> {
-    abstract fun get(languageType: Enum<E>): SingleMessageStorage
+    abstract operator fun get(languageType: Enum<E>): SingleMessageStorage
 }
 
 
@@ -10,7 +10,7 @@ abstract class FormalMessageStorage<E : Enum<E>> : MessageStorage<E>() {
 
     abstract val values: List<SingleMessageStorage>
 
-    override fun get(languageType: Enum<E>): SingleMessageStorage = values[languageType.ordinal]
+    override operator fun get(languageType: Enum<E>): SingleMessageStorage = values[languageType.ordinal]
 
 }
 
