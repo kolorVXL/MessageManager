@@ -1,6 +1,7 @@
 package kr.kolorvxl.messagemanager.bukkit
 
 import kr.kolorvxl.messagemanager.core.*
+import kr.kolorvxl.messagemanager.core.typeset.MessageTypeSet
 import kr.kolorvxl.messagemanager.util.intersperse
 import kr.kolorvxl.messagemanager.util.simpleReduce
 import org.bukkit.configuration.file.YamlConfiguration
