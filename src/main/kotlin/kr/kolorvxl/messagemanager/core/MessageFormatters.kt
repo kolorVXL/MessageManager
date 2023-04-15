@@ -9,7 +9,7 @@ abstract class MessageFormatter<R, M : MessageFormatter<R, M>> : Cloneable {
         string: String, function: M.() -> Unit
     ): R
 
-    abstract infix fun String.to(r: R)
+    abstract fun replace(obj: String, with: R)
 
     abstract fun List<R>.concat(): R
 
@@ -42,13 +42,13 @@ abstract class FormalMessageFormatter<R, M : FormalMessageFormatter<R, M>> : Mes
             .concat()
     }
 
-    override fun String.to(r: R) {
+    override fun replace(obj: String, with: R) {
         internalValue = internalValue.map { text ->
             when (text) {
                 is InternalPlainText<R> -> text.value
-                    .split(this)
+                    .split(obj)
                     .map { InternalPlainText<R>(it) }
-                    .intersperse(InternalSpecialText(r))
+                    .intersperse(InternalSpecialText(with))
                 is InternalSpecialText<R> -> listOf(text)
             }
         }.flatten()
