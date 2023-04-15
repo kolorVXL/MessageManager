@@ -6,7 +6,7 @@ package kr.kolorvxl.messagemanager.core.typeset
 abstract class StaticMessageTypeSet(private val transform: String.() -> String = { this }) : MessageTypeSet {
 
     /**
-     * The function to convert internal [List]<[StaticMessageType]>s to [List]<[MessageType]>.
+     * The property for transforming internal [List]<[StaticMessageType]> to [List]<[MessageType]>.
      * @return Converted [List]<[MessageType]>.
      */
     final override val messageTypes: List<MessageType> by lazy {
