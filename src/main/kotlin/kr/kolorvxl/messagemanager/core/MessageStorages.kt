@@ -1,5 +1,8 @@
 package kr.kolorvxl.messagemanager.core
 
+import kr.kolorvxl.messagemanager.core.typeset.MessageType
+import kr.kolorvxl.messagemanager.core.typeset.MessageTypeSet
+
 
 abstract class MessageStorage<E : Enum<E>> {
     abstract operator fun get(languageType: Enum<E>): SingleMessageStorage

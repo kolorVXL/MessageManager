@@ -1,7 +1,4 @@
-package kr.kolorvxl.messagemanager.api
-
-import kr.kolorvxl.messagemanager.core.MessageType
-import kr.kolorvxl.messagemanager.core.MessageTypeSet
+package kr.kolorvxl.messagemanager.core.typeset
 
 /**
  * The class of [StaticMessageType] set. You can include [StaticMessageType] in this.

@@ -1,9 +1,11 @@
 package kr.kolorvxl.messagemanager.api
 
 import kr.kolorvxl.messagemanager.core.MessageTypeSet
+import kr.kolorvxl.messagemanager.core.typeset.DynamicMessageTypeSet
+import kr.kolorvxl.messagemanager.core.typeset.End
+import kr.kolorvxl.messagemanager.core.typeset.StaticMessageTypeSet
 import kr.kolorvxl.messagemanager.util.kebabCase
 import kr.kolorvxl.messagemanager.util.simpleReduce
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
