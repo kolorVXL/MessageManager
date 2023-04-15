@@ -1,8 +1,8 @@
 package kr.kolorvxl.messagemanager.api
 
-import kr.kolorvxl.messagemanager.core.MessageTypeSet
 import kr.kolorvxl.messagemanager.core.typeset.DynamicMessageTypeSet
 import kr.kolorvxl.messagemanager.core.typeset.End
+import kr.kolorvxl.messagemanager.core.typeset.MessageTypeSet
 import kr.kolorvxl.messagemanager.core.typeset.StaticMessageTypeSet
 import kr.kolorvxl.messagemanager.util.kebabCase
 import kr.kolorvxl.messagemanager.util.simpleReduce
