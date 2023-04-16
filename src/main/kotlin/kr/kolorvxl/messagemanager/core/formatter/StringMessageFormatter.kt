@@ -1,6 +1,5 @@
-package kr.kolorvxl.messagemanager.api
+package kr.kolorvxl.messagemanager.core.formatter
 
-import kr.kolorvxl.messagemanager.core.FormalMessageFormatter
 import kr.kolorvxl.messagemanager.util.simpleReduce
 
 class StringMessageFormatter : FormalMessageFormatter<String, StringMessageFormatter>() {

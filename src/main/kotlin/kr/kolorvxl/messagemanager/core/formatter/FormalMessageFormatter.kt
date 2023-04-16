@@ -1,24 +1,6 @@
-package kr.kolorvxl.messagemanager.core
+package kr.kolorvxl.messagemanager.core.formatter
 
 import kr.kolorvxl.messagemanager.util.intersperse
-
-
-abstract class MessageFormatter<R, M : MessageFormatter<R, M>> : Cloneable {
-
-    abstract fun format(
-        string: String, function: M.() -> Unit
-    ): R
-
-    abstract fun replace(obj: String, with: R)
-
-    abstract fun List<R>.concat(): R
-
-    abstract fun selfConstruct(): M
-
-
-    fun message(string: String, function: M.() -> Unit): R = selfConstruct().format(string, function)
-
-}
 
 abstract class FormalMessageFormatter<R, M : FormalMessageFormatter<R, M>> : MessageFormatter<R, M>() {
 
@@ -61,4 +43,3 @@ abstract class FormalMessageFormatter<R, M : FormalMessageFormatter<R, M>> : Mes
     class InternalSpecialText<R>(val components: R) : InternalText<R>
 
 }
-

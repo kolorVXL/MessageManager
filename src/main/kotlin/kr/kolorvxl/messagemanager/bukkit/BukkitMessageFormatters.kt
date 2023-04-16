@@ -1,6 +1,6 @@
 package kr.kolorvxl.messagemanager.bukkit
 
-import kr.kolorvxl.messagemanager.core.FormalMessageFormatter
+import kr.kolorvxl.messagemanager.core.formatter.FormalMessageFormatter
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder

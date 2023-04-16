@@ -1,5 +1,9 @@
 package kr.kolorvxl.messagemanager.core.typeset
 
+/*
+ * C L A S S
+ */
+
 /**
  * The class of [StaticMessageType] set. You can include [StaticMessageType] in this.
  */
@@ -35,6 +39,9 @@ abstract class End : StaticMessageType()
  */
 data class NamedStaticMessage(val name: List<String>, val message: StaticMessageType)
 
+/**
+ * This property wraps the internal [StaticMessageType] of the receiver object to [NamedStaticMessage]
+ */
 val Any.staticMessages: List<NamedStaticMessage>
     get() {
         val classes = this::class
