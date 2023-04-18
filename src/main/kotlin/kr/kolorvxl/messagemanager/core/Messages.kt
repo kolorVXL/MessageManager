@@ -2,8 +2,6 @@ package kr.kolorvxl.messagemanager.core
 
 sealed interface Message
 
-object NotInitMessage : Message
+object UnloadableMessage : Message
 
-object NullMessage : Message
-
-data class ValuableMessage(val value: String) : Message
+data class LoadedMessage(val value: String?) : Message
