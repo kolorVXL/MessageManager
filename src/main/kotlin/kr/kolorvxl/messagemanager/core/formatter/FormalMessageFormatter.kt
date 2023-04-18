@@ -2,7 +2,7 @@ package kr.kolorvxl.messagemanager.core.formatter
 
 import kr.kolorvxl.messagemanager.util.intersperse
 
-abstract class FormalMessageFormatter<R, M : FormalMessageFormatter<R, M>> : MessageFormatter<R, M>() {
+abstract class FormalMessageFormatter<R, M : FormalMessageFormatter<R, M>> : MessageFormatter<R, M> {
 
     abstract fun String.toResultType(): R
 
