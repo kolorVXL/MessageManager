@@ -35,7 +35,7 @@ interface ResultBroker<R, M : MessageFormatter<R, M>, L : Enum<L>> {
         }
 
         sendResult(
-            messageFormatter().format(
+            messageFormatter().result(
                 message.value,
                 function
             )

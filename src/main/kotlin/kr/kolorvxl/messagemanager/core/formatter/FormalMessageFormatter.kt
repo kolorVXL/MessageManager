@@ -10,7 +10,7 @@ abstract class FormalMessageFormatter<R, M : FormalMessageFormatter<R, M>> : Mes
     private var internalValue: List<InternalText<R>> = emptyList()
 
     @Suppress("UNCHECKED_CAST")
-    override fun format(string: String, function: M.() -> Unit): R {
+    override fun result(string: String, function: M.() -> Unit): R {
         internalValue = listOf(InternalPlainText(string))
         (this as M).function()
 
