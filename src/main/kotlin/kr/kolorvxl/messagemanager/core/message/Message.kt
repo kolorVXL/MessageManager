@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.core
+package kr.kolorvxl.messagemanager.core.message
 
 sealed interface Message
 

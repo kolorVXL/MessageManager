@@ -1,6 +1,6 @@
 package kr.kolorvxl.messagemanager.core.broker
 
-import kr.kolorvxl.messagemanager.core.LoadedMessage
+import kr.kolorvxl.messagemanager.core.message.LoadedMessage
 import kr.kolorvxl.messagemanager.core.formatter.MessageFormatter
 import kr.kolorvxl.messagemanager.core.storage.MessageStorage
 import kr.kolorvxl.messagemanager.core.typeset.MessageType

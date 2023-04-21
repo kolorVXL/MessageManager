@@ -1,6 +1,6 @@
 package kr.kolorvxl.messagemanager.core.storage
 
-import kr.kolorvxl.messagemanager.core.Message
+import kr.kolorvxl.messagemanager.core.message.Message
 import kr.kolorvxl.messagemanager.core.typeset.MessageType
 
 
