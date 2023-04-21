@@ -1,6 +1,7 @@
-package kr.kolorvxl.messagemanager.bukkit
+package kr.kolorvxl.messagemanager.bukkit.storage
 
-import kr.kolorvxl.messagemanager.core.*
+import kr.kolorvxl.messagemanager.core.message.LoadedMessage
+import kr.kolorvxl.messagemanager.core.message.UnloadableMessage
 import kr.kolorvxl.messagemanager.core.storage.FormalMessageStorage
 import kr.kolorvxl.messagemanager.core.storage.FormalSingleMessageStorage
 import kr.kolorvxl.messagemanager.core.storage.SingleMessageStorage

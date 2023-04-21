@@ -1,4 +1,4 @@
-package kr.kolorvxl.messagemanager.bukkit
+package kr.kolorvxl.messagemanager.bukkit.formatter
 
 import kr.kolorvxl.messagemanager.core.formatter.FormalMessageFormatter
 import net.md_5.bungee.api.ChatColor
@@ -38,7 +38,7 @@ class BukkitMessageFormatter : FormalMessageFormatter<Array<BaseComponent>, Bukk
 
     override fun selfConstruct() = BukkitMessageFormatter()
 
-}
+    fun color(str: String): ChatColor = ChatColor.of(str)
+    fun color(color: Color): ChatColor = ChatColor.of(color)
 
-fun color(str: String): ChatColor = ChatColor.of(str)
-fun color(color: Color): ChatColor = ChatColor.of(color)
+}
