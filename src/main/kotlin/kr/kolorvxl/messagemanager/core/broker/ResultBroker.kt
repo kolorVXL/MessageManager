@@ -46,7 +46,7 @@ interface ResultBroker<R, M : MessageFormatter<R, M>, L : Enum<L>> {
 
 interface ResultExtensionBroker<R, M : MessageFormatter<R, M>, L : Enum<L>, I> : ResultBroker<R, M, L> {
 
-    fun I.extensionSender(): ResultExtensionSender<R, I>
+    fun I.extensionSender(): ExtensionSender<R, I>
 
     fun I.send(messageType: MessageType, function: M.() -> Unit) {
         this.extensionSender().send(messageType, function)
