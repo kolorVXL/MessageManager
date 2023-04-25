@@ -10,19 +10,19 @@ open class DynamicMessageTypeSet(val function: DynamicMessageTypeSet.() -> Unit)
         plainMessageTypes.mapIndexed { index, strings -> MessageType(strings, index) }
     }
 
-    protected open fun undef(name: String) {
+    open fun undef(name: String) {
         // Empty (Ha Ha)
     }
 
-    protected open fun undef(name: String, function: DynamicMessageTypeSet.() -> Unit) {
+    open fun undef(name: String, function: DynamicMessageTypeSet.() -> Unit) {
         associate(name, function)
     }
 
-    protected open fun def(name: String) {
+    open fun def(name: String) {
         associate(name)
     }
 
-    protected open fun def(name: String, function: DynamicMessageTypeSet.() -> Unit) {
+    open fun def(name: String, function: DynamicMessageTypeSet.() -> Unit) {
         associate(name)
         associate(name, function)
     }
