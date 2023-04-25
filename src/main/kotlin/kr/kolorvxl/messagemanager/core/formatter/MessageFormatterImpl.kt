@@ -4,8 +4,6 @@ import kr.kolorvxl.messagemanager.util.intersperse
 
 abstract class MessageFormatterImpl<R, M : MessageFormatterImpl<R, M>> : MessageFormatter<R, M> {
 
-    protected open var rawValues: List<RawValue> = emptyList()
-
     @Suppress("UNCHECKED_CAST")
     override fun format(string: String, commands: M.() -> Unit): R {
         rawValues = listOf(RawValue(string))
@@ -22,15 +20,18 @@ abstract class MessageFormatterImpl<R, M : MessageFormatterImpl<R, M>> : Message
     override fun result(plain: String, function: M.() -> Unit): R = copy().format(plain, function)
 
 
+    protected open var rawValues: List<RawValue> = emptyList()
+
+    protected inner class RawValue(val plainValue: String, val resultValue: R? = null) {
+        fun result() = resultValue ?: result(plainValue)
+    }
+
+
     private fun String.replaceWithResult(obj: String, with: R): List<RawValue> {
         return this
             .split(obj)
             .map { RawValue(it) }
             .intersperse(RawValue("", with))
-    }
-
-    protected inner class RawValue(val plainValue: String, val resultValue: R? = null) {
-        fun result() = resultValue ?: result(plainValue)
     }
 
 }
