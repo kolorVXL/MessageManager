@@ -1,12 +1,12 @@
 package kr.kolorvxl.messagemanager.bukkit.formatter
 
-import kr.kolorvxl.messagemanager.core.formatter.FormalMessageFormatter
+import kr.kolorvxl.messagemanager.core.formatter.MessageFormatterImpl
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
 import java.awt.Color
 
-class BukkitMessageFormatter : FormalMessageFormatter<Array<BaseComponent>, BukkitMessageFormatter>() {
+class BukkitMessageFormatter : MessageFormatterImpl<Array<BaseComponent>, BukkitMessageFormatter>() {
 
     var color: ChatColor? = null
     var bold: Boolean? = null
@@ -16,8 +16,8 @@ class BukkitMessageFormatter : FormalMessageFormatter<Array<BaseComponent>, Bukk
     var obfuscate: Boolean? = null
     var font: String? = null
 
-    override fun String.toResultType(): Array<BaseComponent> {
-        val builder = ComponentBuilder(this)
+    override fun result(plain: String): Array<BaseComponent> {
+        val builder = ComponentBuilder(plain)
 
         color?.let(builder::color)
         bold?.let(builder::bold)
@@ -30,13 +30,13 @@ class BukkitMessageFormatter : FormalMessageFormatter<Array<BaseComponent>, Bukk
         return builder.create()
     }
 
-    override fun List<Array<BaseComponent>>.concat(): Array<BaseComponent> {
+    override fun connect(list: List<Array<BaseComponent>>): Array<BaseComponent> {
         val builder = ComponentBuilder()
-        this.forEach(builder::append)
+        list.forEach(builder::append)
         return builder.create()
     }
 
-    override fun selfConstruct() = BukkitMessageFormatter()
+    override fun copy() = BukkitMessageFormatter()
 
     fun color(str: String): ChatColor = ChatColor.of(str)
     fun color(color: Color): ChatColor = ChatColor.of(color)

@@ -1,17 +1,17 @@
 package kr.kolorvxl.messagemanager.core.formatter
 
+interface MessageFormatter<R, M : MessageFormatter<R, M>> {
 
-interface MessageFormatter<R, M : MessageFormatter<R, M>> : Cloneable {
-
-    fun result(string: String, function: M.() -> Unit): R
+    fun format(string: String, commands: M.() -> Unit): R
 
     fun replace(obj: String, with: R)
 
-    fun List<R>.concat(): R
+    fun result(plain: String, function: M.() -> Unit): R
 
-    fun selfConstruct(): M
+    fun result(plain: String): R
 
+    fun connect(list: List<R>): R
 
-    fun message(string: String, function: M.() -> Unit): R = selfConstruct().result(string, function)
+    fun copy(): M
 
 }
