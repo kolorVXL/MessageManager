@@ -12,13 +12,11 @@ class StaticLanguageSet(
         when (languageSetType) {
             is Sealed -> languageClass.sealedSubclasses
             is Nested -> languageClass.nestedClasses
+        }.staticLanguages.mapIndexed { index, value ->
+            val language = LanguageImpl(value.name.transform(), index)
+            value.language.language = language
+            language
         }
-            .staticLanguages
-            .mapIndexed { index, value ->
-                val language = LanguageImpl(value.name.transform(), index)
-                value.language = language
-                language
-            }
     }
 
 }
@@ -43,8 +41,11 @@ abstract class StaticLanguage(var language: Language? = null) : Language {
 
 private class NamedStaticLanguage(val name: String, val language: StaticLanguage)
 
-private val Collection<KClass<*>>.staticLanguages: List<StaticLanguage>
+private val Collection<KClass<*>>.staticLanguages: List<NamedStaticLanguage>
     get() = this
         .filter { it.simpleName != null }
         .mapNotNull { it.objectInstance }
         .filterIsInstance<StaticLanguage>()
+        .map { NamedStaticLanguage(it.className, it) }
+
+private val Any.className: String get() = this::class.simpleName!!
