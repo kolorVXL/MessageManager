@@ -16,7 +16,6 @@ inline fun bukkitStorage(
     javaPlugin: JavaPlugin,
     transform: String.() -> String = { this }
 ): List<List<String>> {
-    val messages = messageSet.messages
     return eachLanguage(languageSet) { language ->
         val file = File(javaPlugin.dataFolder, "${language.name.transform()}.yml")
 

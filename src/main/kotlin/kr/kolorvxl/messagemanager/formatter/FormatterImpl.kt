@@ -2,12 +2,12 @@ package kr.kolorvxl.messagemanager.formatter
 
 import kr.kolorvxl.messagemanager.util.intersperse
 
-abstract class FormatterImpl<R, M : FormatterImpl<R, M>> : Formatter<R, M> {
+abstract class FormatterImpl<R, F : FormatterImpl<R, F>> : Formatter<R, F> {
 
     @Suppress("UNCHECKED_CAST")
-    override fun format(string: String, commands: M.() -> Unit): R {
+    override fun format(string: String, commands: F.() -> Unit): R {
         rawValues = listOf(RawValue(string))
-        (this as M).commands()
+        (this as F).commands()
         return connect(rawValues.map { it.result() })
     }
 
@@ -17,7 +17,7 @@ abstract class FormatterImpl<R, M : FormatterImpl<R, M>> : Formatter<R, M> {
             .flatten()
     }
 
-    override fun result(plain: String, function: M.() -> Unit): R = copy().format(plain, function)
+    override fun result(plain: String, function: F.() -> Unit): R = copy().format(plain, function)
 
 
     protected open var rawValues: List<RawValue> = emptyList()
