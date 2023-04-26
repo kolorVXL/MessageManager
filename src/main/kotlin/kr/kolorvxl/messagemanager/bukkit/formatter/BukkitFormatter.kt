@@ -1,12 +1,12 @@
 package kr.kolorvxl.messagemanager.bukkit.formatter
 
-import kr.kolorvxl.messagemanager.core.formatter.MessageFormatterImpl
+import kr.kolorvxl.messagemanager.formatter.FormatterImpl
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
 import java.awt.Color
 
-class BukkitMessageFormatter : MessageFormatterImpl<Array<BaseComponent>, BukkitMessageFormatter>() {
+class BukkitFormatter : FormatterImpl<Array<BaseComponent>, BukkitFormatter>() {
 
     var color: ChatColor? = null
     var bold: Boolean? = null
@@ -36,7 +36,7 @@ class BukkitMessageFormatter : MessageFormatterImpl<Array<BaseComponent>, Bukkit
         return builder.create()
     }
 
-    override fun copy() = BukkitMessageFormatter()
+    override fun copy() = BukkitFormatter()
 
     fun color(str: String): ChatColor = ChatColor.of(str)
     fun color(color: Color): ChatColor = ChatColor.of(color)

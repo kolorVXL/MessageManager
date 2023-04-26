@@ -1,6 +1,6 @@
-package kr.kolorvxl.messagemanager.core.formatter
+package kr.kolorvxl.messagemanager.formatter
 
-interface MessageFormatter<R, M : MessageFormatter<R, M>> {
+interface Formatter<R, M : Formatter<R, M>> {
 
     fun format(string: String, commands: M.() -> Unit): R
 

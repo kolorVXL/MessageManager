@@ -1,8 +1,8 @@
-package kr.kolorvxl.messagemanager.core.formatter
+package kr.kolorvxl.messagemanager.formatter
 
 import kr.kolorvxl.messagemanager.util.intersperse
 
-abstract class MessageFormatterImpl<R, M : MessageFormatterImpl<R, M>> : MessageFormatter<R, M> {
+abstract class FormatterImpl<R, M : FormatterImpl<R, M>> : Formatter<R, M> {
 
     @Suppress("UNCHECKED_CAST")
     override fun format(string: String, commands: M.() -> Unit): R {
