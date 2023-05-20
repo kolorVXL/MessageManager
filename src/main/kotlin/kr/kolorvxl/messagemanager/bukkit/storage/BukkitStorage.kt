@@ -21,7 +21,7 @@ inline fun bukkitStorage(
 
         if (!file.exists()) {
             file.parentFile.mkdirs()
-            javaPlugin.saveResource(file.name, false)
+            runCatching { javaPlugin.saveResource(file.name, false) }
         }
 
         var langConfig: YamlConfiguration? = YamlConfiguration()
@@ -31,7 +31,7 @@ inline fun bukkitStorage(
 
         eachMessage(messageSet) { message ->
             val messageName = message.name.intersperse(".").simpleReduce()
-            langConfig?.let { it.getString(messageName) } ?: "Unloadable"
+            langConfig?.let { it.getString(messageName) }?.replace('&', '§') ?: "Unloadable"
         }
     }
 }

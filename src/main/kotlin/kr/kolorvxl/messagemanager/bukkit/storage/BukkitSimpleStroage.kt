@@ -13,15 +13,15 @@ abstract class BukkitSimpleStorage : SimpleStorage<Array<BaseComponent>, BukkitF
 }
 
 
-internal fun SimpleStorage<Array<BaseComponent>, BukkitFormatter>.send(
+fun SimpleStorage<Array<BaseComponent>, BukkitFormatter>.send(
     sender: CommandSender,
     plain: String,
     commands: BukkitFormatter.() -> Unit
 ) {
-    sender.spigot().sendMessage(*format(plain.replace('&', '§'), commands))
+    sender.spigot().sendMessage(*format(plain, commands))
 }
 
-internal fun SimpleStorage<Array<BaseComponent>, BukkitFormatter>.send(
+fun SimpleStorage<Array<BaseComponent>, BukkitFormatter>.send(
     sender: CommandSender,
     message: Message,
     commands: BukkitFormatter.() -> Unit
