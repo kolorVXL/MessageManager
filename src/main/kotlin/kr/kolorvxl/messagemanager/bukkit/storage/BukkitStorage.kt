@@ -31,7 +31,7 @@ inline fun bukkitStorage(
 
         eachMessage(messageSet) { message ->
             val messageName = message.name.intersperse(".").simpleReduce()
-            langConfig?.let { it.getString(messageName) }?.replace('&', '§') ?: "Unloadable"
+            langConfig?.getString(messageName)?.replace('&', '§') ?: "Unloadable"
         }
     }
 }
