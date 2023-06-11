@@ -52,11 +52,15 @@ abstract class FormatterImpl<R, F : FormatterImpl<R, F>> : Formatter<R, F> {
     open var rawValues: List<RawValue<R>> = emptyList()
 
     private fun RawValue<R>.replaceOnlyReprocessablePlain(obj: String, with: RawValue<R>): List<RawValue<R>> {
-        return if (this is PlainValue) {
-            this.plainValue.replaceWithRawValue(obj, with)
-        } else {
-            listOf(this)
+        if (this !is PlainValue) {
+            return listOf(this)
         }
+
+        if (!this.reprocessable) {
+            return listOf(this)
+        }
+
+        return this.plainValue.replaceWithRawValue(obj, with)
     }
 
     private fun String.replaceWithRawValue(obj: String, with: RawValue<R>): List<RawValue<R>> {
