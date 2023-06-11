@@ -21,6 +21,6 @@ interface Formatter<R, F : Formatter<R, F>> {
 
     fun connect(list: List<R>): R
 
-    fun copy(): F
+    fun reconstruct(): F
 
 }

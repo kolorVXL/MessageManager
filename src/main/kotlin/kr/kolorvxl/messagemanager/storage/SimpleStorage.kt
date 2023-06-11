@@ -13,7 +13,7 @@ abstract class SimpleStorage<R, F : Formatter<R, F>> {
     abstract val formatter: Formatter<R, F>
 
 
-    fun format(plain: String, commands: F.() -> Unit) = formatter.copy().format(plain, commands)
+    fun format(plain: String, commands: F.() -> Unit) = formatter.reconstruct().format(plain, commands)
 
     fun get(message: Message): String = storage[language.id][message.id]
 

@@ -8,6 +8,6 @@ class StringFormatter : FormatterImpl<String, StringFormatter>() {
 
     override fun result(plain: String) = plain
 
-    override fun copy() = StringFormatter()
+    override fun reconstruct() = StringFormatter()
 
 }

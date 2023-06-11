@@ -46,7 +46,7 @@ abstract class FormatterImpl<R, F : FormatterImpl<R, F>> : Formatter<R, F> {
             .flatten()
     }
 
-    override fun result(plain: String, function: F.() -> Unit): R = copy().format(plain, function)
+    override fun result(plain: String, function: F.() -> Unit): R = reconstruct().format(plain, function)
 
 
     open var rawValues: List<RawValue<R>> = emptyList()

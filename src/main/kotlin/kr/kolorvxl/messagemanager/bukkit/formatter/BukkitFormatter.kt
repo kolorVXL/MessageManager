@@ -46,7 +46,7 @@ class BukkitFormatter : FormatterImpl<Array<BaseComponent>, BukkitFormatter>() {
         return builder.create()
     }
 
-    override fun copy() = BukkitFormatter()
+    override fun reconstruct() = BukkitFormatter()
 
     fun color(str: String): ChatColor = ChatColor.of(str)
     fun color(color: Color): ChatColor = ChatColor.of(color)
