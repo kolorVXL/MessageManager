@@ -6,32 +6,70 @@ abstract class FormatterImpl<R, F : FormatterImpl<R, F>> : Formatter<R, F> {
 
     @Suppress("UNCHECKED_CAST")
     override fun format(string: String, commands: F.() -> Unit): R {
-        rawValues = listOf(RawValue(string))
+        rawValues = listOf(PlainValue(string, reprocessable = true))
         (this as F).commands()
-        return connect(rawValues.map { it.result() })
+
+        val outputArray = ArrayList<R>()
+        var buffer = ""
+        val flush = flush@{
+            if (buffer == "") {
+                return@flush
+            }
+            outputArray.add(result(buffer))
+            buffer = ""
+        }
+
+        rawValues.forEach {
+            if (it is ResultValue) {
+                flush()
+                outputArray.add(it.resultValue)
+            }
+
+            if (it is PlainValue) {
+                buffer += it.plainValue
+            }
+        }
+        flush()
+
+        return connect(outputArray)
     }
 
     override fun replace(obj: String, with: R) {
         rawValues = rawValues
-            .map { it.resultValue?.run { listOf(it) } ?: it.plainValue.replaceWithResult(obj, with) }
+            .map { it.replaceOnlyReprocessablePlain(obj, ResultValue(with)) }
+            .flatten()
+    }
+
+    override fun replace(obj: String, with: String, reprocessable: Boolean) {
+        rawValues = rawValues
+            .map { it.replaceOnlyReprocessablePlain(obj, PlainValue(with, reprocessable)) }
             .flatten()
     }
 
     override fun result(plain: String, function: F.() -> Unit): R = copy().format(plain, function)
 
 
-    protected open var rawValues: List<RawValue> = emptyList()
+    open var rawValues: List<RawValue<R>> = emptyList()
 
-    protected inner class RawValue(val plainValue: String, val resultValue: R? = null) {
-        fun result() = resultValue ?: result(plainValue)
+    private fun RawValue<R>.replaceOnlyReprocessablePlain(obj: String, with: RawValue<R>): List<RawValue<R>> {
+        return if (this is PlainValue) {
+            this.plainValue.replaceWithRawValue(obj, with)
+        } else {
+            listOf(this)
+        }
     }
 
-
-    private fun String.replaceWithResult(obj: String, with: R): List<RawValue> {
+    private fun String.replaceWithRawValue(obj: String, with: RawValue<R>): List<RawValue<R>> {
         return this
             .split(obj)
-            .map { RawValue(it) }
-            .intersperse(RawValue("", with))
+            .map { PlainValue<R>(it, reprocessable = true) }
+            .intersperse(with)
     }
 
 }
+
+sealed interface RawValue<R>
+
+class PlainValue<R>(val plainValue: String, val reprocessable: Boolean) : RawValue<R>
+
+class ResultValue<R>(val resultValue: R) : RawValue<R>
